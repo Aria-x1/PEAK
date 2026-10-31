@@ -3,7 +3,7 @@ QC Script: Figure Data Extraction Quality Control
 Uses OpenAI GPT-4o Vision to QC the extracted data against its source figure.
 
 Usage:
-    python 02_vision_qc_against_figures.py --root /path/to/AutoPK/extracted_images
+    python 02_vision_qc_against_figures.py --root /path/to/PEAK/extracted_images
                          --api_key YOUR_KEY (or set the OPENAI_API_KEY env var)
                          --output qc_results.csv
                          --workers 4 (number of parallel threads, default 3)

@@ -4,7 +4,7 @@ Step 2 Final Validation: integrated final validation analysis
 Pulls together every issue found earlier and its corresponding fix.
 
 Usage:
-    python 03_final_validation_vs_literature.py --base-dir /path/to/AutoPK
+    python 03_final_validation_vs_literature.py --base-dir /path/to/PEAK
 """
 
 import argparse
@@ -15,7 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 
 class FinalValidator:
@@ -547,7 +547,7 @@ class FinalValidator:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.')")
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.')")
     ap.add_argument("--calculated-file", default=None,
                      help="CSV of calculated PK parameters "
                           "(default: <base-dir>/pk_calculation/step1_calculated_pk_parameters_all.csv)")

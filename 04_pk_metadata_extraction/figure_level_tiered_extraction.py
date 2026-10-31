@@ -23,10 +23,10 @@ Requires OPENAI_API_KEY and ANTHROPIC_API_KEY (via environment or a .env file).
 
 Usage:
     python3 figure_level_tiered_extraction.py \
-        --base-dir /path/to/AutoPK
+        --base-dir /path/to/PEAK
 
-    (--base-dir defaults to the AUTOPK_BASE_DIR environment variable if set,
-     otherwise the current directory. Expects the standard AutoPK layout
+    (--base-dir defaults to the PEAK_BASE_DIR environment variable if set,
+     otherwise the current directory. Expects the standard PEAK layout
      under it: LLM-POC-Open-Articles/, extracted_images/, and creates
      extracted_metadata/ for output - override any of these individually
      with --papers-dir / --extracted-dir / --output-dir.)
@@ -45,7 +45,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 
 # ===== Tier 1A: extract from caption =====
@@ -679,7 +679,7 @@ def process_pmid(pmid: str, extractor: PharmacokineticsExtractor,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK project root (default: $AUTOPK_BASE_DIR env var, "
+                     help="PEAK project root (default: $PEAK_BASE_DIR env var, "
                           "or current directory). Expects LLM-POC-Open-Articles/ "
                           "and extracted_images/ under it unless overridden below.")
     ap.add_argument("--papers-dir", default=None,

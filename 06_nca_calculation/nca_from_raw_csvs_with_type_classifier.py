@@ -18,8 +18,8 @@ Strategy:
 - For individual-subject curves, only the mean across curves is computed
 
 Usage:
-    python nca_from_raw_csvs_with_type_classifier.py --base-dir /path/to/AutoPK
-    python nca_from_raw_csvs_with_type_classifier.py --base-dir /path/to/AutoPK --test
+    python nca_from_raw_csvs_with_type_classifier.py --base-dir /path/to/PEAK
+    python nca_from_raw_csvs_with_type_classifier.py --base-dir /path/to/PEAK --test
 """
 
 import argparse
@@ -36,7 +36,7 @@ from scipy.integrate import trapezoid
 
 warnings.filterwarnings('ignore')
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 
 class SmartDataIdentifier:
@@ -728,7 +728,7 @@ class DataProcessor:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.')")
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.')")
     ap.add_argument("--images-dir", default=None,
                      help="Directory of extracted digitized-CSV images (default: <base-dir>/extracted_images)")
     ap.add_argument("--metadata-file", default=None,

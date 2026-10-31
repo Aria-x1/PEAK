@@ -1,5 +1,5 @@
 """
-AutoPK NCA parameter calculator (manifest-based)
+PEAK NCA parameter calculator (manifest-based)
 --------------------------------------------------
 Fills in the 4 empty parameter columns in pk_curve_level_master_index.csv:
     Half life (hours), CMAX, AUC, TMAX
@@ -16,7 +16,7 @@ self-contained approach that works directly from the raw digitized CSVs and
 does its own data-type classification. Both are kept in active use --
 see file docstring there for how the two differ.)
 
-Method (matches pipeline conventions already established in AutoPK):
+Method (matches pipeline conventions already established in PEAK):
   - CMAX / TMAX: simple max of observed (non-missing) concentration and its time
   - AUC: linear trapezoidal over all valid points (AUC_last),
          then extrapolated to infinity: AUC_inf = AUC_last + C_last / ke
@@ -36,11 +36,11 @@ transparency / flagging, not "fixed" silently):
 
 Usage:
     python nca_from_split_curves.py --master pk_curve_level_master_index.csv \
-                        --base-dir /path/to/AutoPK \
+                        --base-dir /path/to/PEAK \
                         --out pk_curve_level_master_index_filled.csv
 
     # --curve-root and --master/--out can each be overridden individually;
-    # --base-dir (or $AUTOPK_BASE_DIR) just supplies defaults for them.
+    # --base-dir (or $PEAK_BASE_DIR) just supplies defaults for them.
 """
 import argparse
 import os
@@ -48,7 +48,7 @@ import re
 import numpy as np
 import pandas as pd
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 _LEADING_NUM = re.compile(r"^\s*([+-]?\d+\.?\d*)")
 
@@ -56,7 +56,7 @@ _LEADING_NUM = re.compile(r"^\s*([+-]?\d+\.?\d*)")
 def parse_conc_cell(v):
     """Returns (numeric_value_or_nan, parse_flag_or_None).
 
-    Handles known messy patterns found in AutoPK Branch-A digitized CSVs:
+    Handles known messy patterns found in PEAK Branch-A digitized CSVs:
       - clean numeric -> used as-is
       - '-' or blank  -> missing (matches pre-existing convention for empty cells)
       - '~X'          -> approximate reading, use X, flag 'approx_reading'
@@ -170,7 +170,7 @@ def load_curve_file(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.'), "
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.'), "
                           "used to fill in --master/--curve-root/--out when not given")
     ap.add_argument("--master", default=None,
                      help="Input master index CSV (default: <base-dir>/pk_curve_level_master_index.csv)")
