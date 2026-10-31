@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ================================================================================
-AutoPK - LLM fallback review script
+PEAK - LLM fallback review script
 ================================================================================
 For the rows in curve_manifest.csv that rule-based matching couldn't resolve
 (UNMATCHED / NEEDS_REVIEW), group them by source figure (all unresolved
@@ -29,7 +29,7 @@ Install dependencies:
   pip install anthropic --break-system-packages
 Usage:
   export ANTHROPIC_API_KEY=sk-ant-...
-  python3 02_llm_review_unmatched_curves.py --base-dir /path/to/AutoPK
+  python3 02_llm_review_unmatched_curves.py --base-dir /path/to/PEAK
 ================================================================================
 """
 
@@ -47,11 +47,11 @@ except ImportError:
 
 
 # ==============================================================================
-# Configuration - paths are resolved from --base-dir / AUTOPK_BASE_DIR, or
+# Configuration - paths are resolved from --base-dir / PEAK_BASE_DIR, or
 # can be overridden individually
 # ==============================================================================
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 MODEL = "claude-haiku-4-5-20251001"
 BASE_MAX_TOKENS = 512
@@ -280,7 +280,7 @@ def main(manifest_path, meta_path, out_path, log_path, limit=None, dry_run=False
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.')")
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.')")
     ap.add_argument("--manifest", default=None,
                      help="Input curve manifest CSV (default: <base-dir>/extracted_curves/curve_manifest.csv)")
     ap.add_argument("--meta", default=None,

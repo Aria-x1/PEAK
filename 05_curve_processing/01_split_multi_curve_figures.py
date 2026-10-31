@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ================================================================================
-AutoPK - Multi-curve figure splitter
+PEAK - Multi-curve figure splitter
 ================================================================================
 Splits the digitized CSVs in extracted_images/ into "one sub-CSV per curve",
 writes them to extracted_curves/, and produces a curve_manifest.csv index.
@@ -39,16 +39,16 @@ import pandas as pd
 
 
 # ==============================================================================
-# 1. Configuration - paths are resolved from --base-dir / AUTOPK_BASE_DIR, or
+# 1. Configuration - paths are resolved from --base-dir / PEAK_BASE_DIR, or
 #    can be overridden individually
 # ==============================================================================
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 # Relative path prefix written into the manifest (kept relative so the
 # manifest is portable across machines); override with --images-rel or
-# AUTOPK_IMAGES_REL if your images live under a different relative path.
-DEFAULT_IMAGES_ROOT_REL = os.environ.get("AUTOPK_IMAGES_REL", "AutoPK/extracted_images")
+# PEAK_IMAGES_REL if your images live under a different relative path.
+DEFAULT_IMAGES_ROOT_REL = os.environ.get("PEAK_IMAGES_REL", "AutoPK/extracted_images")
 
 # Minimum number of valid points a curve needs to be output at all
 MIN_VALID_POINTS = 3
@@ -878,7 +878,7 @@ def main(meta_path, images_root, out_root, images_root_rel):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.')")
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.')")
     ap.add_argument("--meta", default=None,
                      help="Figure-level PK metadata CSV (default: <base-dir>/extract_metadata_trial2/step_2_calculated_parameters/pk_metadata_figure_level.csv)")
     ap.add_argument("--images", default=None,
@@ -887,7 +887,7 @@ if __name__ == "__main__":
                      help="Output directory for split curves + manifest (default: <base-dir>/extracted_curves)")
     ap.add_argument("--images-rel", default=DEFAULT_IMAGES_ROOT_REL,
                      help="Relative path prefix written into the manifest for image/CSV "
-                          "provenance columns (default: $AUTOPK_IMAGES_REL or "
+                          "provenance columns (default: $PEAK_IMAGES_REL or "
                           "'AutoPK/extracted_images')")
     args = ap.parse_args()
 

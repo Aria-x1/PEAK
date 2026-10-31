@@ -19,7 +19,7 @@ field name for the SMILES property by checking several possible field
 names.
 
 Usage:
-    python name_to_smiles_via_pubchem_direct.py --base-dir /path/to/AutoPK
+    python name_to_smiles_via_pubchem_direct.py --base-dir /path/to/PEAK
 """
 
 import argparse
@@ -30,7 +30,7 @@ from typing import Optional
 import pandas as pd
 import requests
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 
 def get_smiles_robust(drug_name: str) -> Optional[str]:
@@ -80,7 +80,7 @@ def get_smiles_robust(drug_name: str) -> Optional[str]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.')")
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.')")
     ap.add_argument("--input-file", default=None,
                      help="Input metadata CSV (default: <base-dir>/pk_metadata_figure_level.csv)")
     ap.add_argument("--output-file", default=None,

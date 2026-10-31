@@ -21,7 +21,7 @@ Output filename convention:
 
 Usage:
     python3 01_detect_and_split_panels.py <pmid> --base /path/to/extracted_images
-    (--base defaults to the AUTOPK_IMAGES_DIR environment variable if set,
+    (--base defaults to the PEAK_IMAGES_DIR environment variable if set,
      otherwise the current directory)
 """
 
@@ -37,7 +37,7 @@ import pytesseract
 from anthropic import Anthropic
 import base64
 
-DEFAULT_IMAGES_DIR = os.environ.get("AUTOPK_IMAGES_DIR", ".")
+DEFAULT_IMAGES_DIR = os.environ.get("PEAK_IMAGES_DIR", ".")
 
 
 def normalize_panel_label(raw_label, fallback_index):
@@ -372,7 +372,7 @@ if __name__ == '__main__':
     ap.add_argument("pmid", help="PMID subfolder to process, e.g. 18573931")
     ap.add_argument("--base", default=DEFAULT_IMAGES_DIR,
                      help="Path to the extracted_images root folder "
-                          "(default: $AUTOPK_IMAGES_DIR env var, or current directory)")
+                          "(default: $PEAK_IMAGES_DIR env var, or current directory)")
     args = ap.parse_args()
 
     pmid_folder = Path(args.base) / args.pmid

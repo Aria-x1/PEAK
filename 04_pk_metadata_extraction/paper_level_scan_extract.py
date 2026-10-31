@@ -27,7 +27,7 @@ Requires ANTHROPIC_API_KEY (via environment).
 Usage:
     python3 paper_level_scan_extract.py --pdf-dir /path/to/pdfs --output-dir ./pk_extraction_output
     (--pdf-dir defaults to <base-dir>/LLM-POC-Open-Articles, where
-     --base-dir defaults to the AUTOPK_BASE_DIR environment variable if set,
+     --base-dir defaults to the PEAK_BASE_DIR environment variable if set,
      otherwise the current directory)
 """
 
@@ -45,7 +45,7 @@ import pymupdf  # PyMuPDF for PDF processing
 # Configuration
 # ============================================================================
 
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 
 class Config:
@@ -500,7 +500,7 @@ def process_paper(client: anthropic.Anthropic, pdf_path: str, pmid: str,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK project root (default: $AUTOPK_BASE_DIR env var, "
+                     help="PEAK project root (default: $PEAK_BASE_DIR env var, "
                           "or current directory). Used only to derive defaults below.")
     ap.add_argument("--pdf-dir", default=None,
                      help="Folder of source PDFs (default: <base-dir>/LLM-POC-Open-Articles)")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Tier 2 scan - AutoPK / PDR must-have field audit on RAW digitized point CSVs.
+Tier 2 scan - PEAK / PDR must-have field audit on RAW digitized point CSVs.
 
 Checks every raw CSV pointed to by csv_location in calculated_pk_curves,
 quantifying two must-have fields that Tier-1 extraction can't answer:
@@ -12,7 +12,7 @@ Also opportunistically recovers:
     #10 LLOQ / BLQ markers
 
 Usage:
-    python3 01_audit_raw_digitized_points.py --base-dir /path/to/AutoPK
+    python3 01_audit_raw_digitized_points.py --base-dir /path/to/PEAK
 Optional:
     python3 01_audit_raw_digitized_points.py --base /Users/xxy/Documents/MML --input calculated_pk_curves_v2.csv
 """
@@ -25,8 +25,8 @@ import sys
 import pandas as pd
 
 # ---------------------------------------------------------------- configuration
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
-DEFAULT_BASE = os.environ.get("AUTOPK_MML_DIR", DEFAULT_BASE_DIR)  # base dir that csv_location is relative to
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
+DEFAULT_BASE = os.environ.get("PEAK_MML_DIR", DEFAULT_BASE_DIR)  # base dir that csv_location is relative to
 DEFAULT_INPUT = "calculated_pk_curves_v2.csv"      # input table (v1 or v2 both work)
 OUT_DETAIL = "tier2_per_csv.csv"                   # per-file detail
 OUT_SUMMARY = "tier2_summary.txt"                  # summary report
@@ -158,11 +158,11 @@ def scan_csv(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.'); "
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.'); "
                           "used to fill in --base when not given")
     ap.add_argument("--base", default=None,
                      help="Base directory that csv_location is relative to "
-                          "(default: --base-dir, or $AUTOPK_MML_DIR if set)")
+                          "(default: --base-dir, or $PEAK_MML_DIR if set)")
     ap.add_argument("--input", default=DEFAULT_INPUT, help="Path to the calculated_pk_curves CSV")
     args = ap.parse_args()
 

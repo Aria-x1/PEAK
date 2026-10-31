@@ -1,8 +1,10 @@
-# AutoPK
+# PEAK
+
+Formerly known as AutoPK.
 
 A pipeline for extracting pharmacokinetic (PK) data from scientific literature using LLMs.
 
-Given a set of PDF papers, AutoPK extracts figures and tables, identifies concentration time curves, digitizes them, resolves drug/dose/species/matrix information, and calculates standard PK parameters (Cmax, Tmax, AUC, half life).
+Given a set of PDF papers, PEAK extracts figures and tables, identifies concentration time curves, digitizes them, resolves drug/dose/species/matrix information, and calculates standard PK parameters (Cmax, Tmax, AUC, half life).
 
 ## Pipeline stages
 
@@ -28,7 +30,7 @@ Each folder is a stage in the pipeline, meant to be run roughly in order.
 Scripts read paths from command line arguments, which default to environment variables when set:
 
 ```bash
-export AUTOPK_BASE_DIR=/path/to/your/AutoPK/data
+export PEAK_BASE_DIR=/path/to/your/PEAK/data
 ```
 
 Run any script with `--help` to see its specific arguments.

@@ -20,7 +20,7 @@ Design:
 
 Usage:
     export OPENAI_API_KEY=sk-...
-    python3 extract_analyte_units.py --base-dir /path/to/AutoPK
+    python3 extract_analyte_units.py --base-dir /path/to/PEAK
 
 Requires:
     pip install openai pandas --break-system-packages
@@ -38,10 +38,10 @@ import pandas as pd
 from openai import OpenAI
 
 # ---------------------------------------------------------------------------
-# Config -- paths are resolved from --base-dir / AUTOPK_BASE_DIR, or can be
+# Config -- paths are resolved from --base-dir / PEAK_BASE_DIR, or can be
 # overridden individually
 # ---------------------------------------------------------------------------
-DEFAULT_BASE_DIR = os.environ.get("AUTOPK_BASE_DIR", ".")
+DEFAULT_BASE_DIR = os.environ.get("PEAK_BASE_DIR", ".")
 
 MODEL = "gpt-4o-mini"
 IMAGE_DETAIL = "high"
@@ -290,7 +290,7 @@ def already_succeeded(df: pd.DataFrame, pmid, fig_base) -> bool:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", default=DEFAULT_BASE_DIR,
-                     help="AutoPK root dir (default: $AUTOPK_BASE_DIR or '.')")
+                     help="PEAK root dir (default: $PEAK_BASE_DIR or '.')")
     ap.add_argument("--master-csv", default=None,
                      help="Input master index CSV (default: <base-dir>/pk_curve_level_master_index.csv)")
     ap.add_argument("--images-dir", default=None,
